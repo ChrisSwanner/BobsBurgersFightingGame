@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export function EquippedAtk(player) {
   let attack = 0;
   let i;

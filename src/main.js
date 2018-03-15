@@ -35,31 +35,33 @@ $(document).ready(function(){
   let Jairo = new Monster("Jairo", jairoStats, PonyTail);
   let randyStats = new MonsterStats(50,10,3,3);
   let Randy = new Monster("Randy", randyStats, camera);
+
+  Bob.equipped.push(spatula);
+  Linda.equipped.push(tongs);
+  Louise.equipped.push(bunnyHat);
+  Tina.equipped.push(glasses);
+  Gene.equipped.push(keyboard);
+
   $('#heroSelect').submit(function(event){
     event.preventDefault();
     if ($('#select').val() === "BOB") {
       selectedPlayer = Bob;
-      Bob.equipped.push(spatula);
       $('#creation').hide();
       $('#fight-screen').show();
     } else if ($('#select').val() === "LINDA") {
       selectedPlayer = Linda;
-      Linda.equipped.push(tongs);
       $('#creation').hide();
       $('#fight-screen').show();
     } else if ($('#select').val() === "LOUISE") {
       selectedPlayer = Louise;
-      Louise.equipped.push(bunnyHat);
       $('#creation').hide();
       $('#fight-screen').show();
     } else if ($('#select').val() === "TINA") {
       selectedPlayer = Tina;
-      Tina.equipped.push(glasses);
       $('#creation').hide();
       $('#fight-screen').show();
     } else if ($('#select').val() === "GENE") {
       selectedPlayer = Gene;
-      Gene.equipped.push(keyboard);
       $('#creation').hide();
       $('#fight-screen').show();
     }
@@ -90,6 +92,13 @@ $('#playerRest').click(function(){
   $('#monsterHealth').text(selectedMonster.name + "'s Health: " + selectedMonster.hp);
 })
 
+$('#inventory').click(function() {
+  $('#inventory-panel').slideToggle();
+  $('#inventory-list').text(selectedPlayer.inventory[0].name);
+  $('#inventory-list').text(selectedPlayer.inventory[1].name);
+});
+
+
 $('#playerAttack').click(function(){
 
   EquippedAtk(selectedPlayer);
@@ -98,7 +107,8 @@ $('#playerAttack').click(function(){
   $('#monsterHealth').text(selectedMonster.name + "'s Health: " + selectedMonster.hp);
   if (selectedMonster.hp <= 0) {
     $('#enemy-fight').hide();
-    $('#randy-death').show();
+    $('#creation').show();
+    selectedPlayer.inventory.push(selectedMonster.loot);
   } else if (selectedPlayer.hp <= 0) {
     $('#enemy-fight').hide();
     $('#player-death').show();
