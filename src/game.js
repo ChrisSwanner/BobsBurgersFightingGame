@@ -21,14 +21,16 @@ export function Player(name, stats) {
   this.stats = stats;
   this.inventory = [];
   this.equipped = [];
-  this.hp = this.stats.str * 1.5;
-  this.mp = this.stats.cha * 1.5;
+  this.hp = this.stats.health;
+  this.mp = this.stats.cha * 15;
   this.xp = 0;
+  this.hitChance = this.stats.dex / this.stats.ckn;
   this.attackPow = this.stats.str * this.stats.dex;
-  this.defense = this.stats.wil * this.stats.str;
+  this.defense = this.stats.str * .5;
 }
 
-export function Stats(str, dex, ckn, wil, cha) {
+export function Stats(health, str, dex, ckn, wil, cha) {
+  this.health = health;
   this.str = str;
   this.dex = dex;
   this.ckn = ckn;
@@ -60,22 +62,42 @@ export function Item(name, attackPower, defensePower, magic, value) {
 }
 
 export function MonsterAttack(player, monster) {
-  let monstAttack = Math.random(monster.stats.attack);
-  let playerDefense = player.stats.defensePower;
-
+  let monstAttack = Math.floor(Math.random(monster.stats.attack) * 15);
+  console.log("monstAttack" + monstAttack);
+  let playerDefense = player.defense;
     if (monstAttack > playerDefense) {
-      player.hp = ((player.hp) - (monstAttack-playerDefense));
+      player.hp = player.hp - monstAttack;
+
+
     }
 
 
 }
 export function PlayerAttack(player, monster) {
-  let playerAttack = Math.random(player.attackPower);
+  let playerAttack = Math.floor(Math.random(player.stats.playerAttack) * 15);
+  console.log("playerAttack" + playerAttack);
   let monsterDefense = monster.stats.defense;
+  if (playerAttack > monsterDefense) {
+      monster.hp = monster.hp - playerAttack;
 
-    if (playerAttack > monsterDefense) {
-      monster.hp = ((monster.hp) - (playerAttack-monsterDefense));
+    } else{
+      $('#playerSpeak').text("You Missed!");
     }
+}
 
+export function PlayerRest(player) {
+  if (player.hp >= player.stats.health - 10) {
+    player.hp = player.stats.health;
+    alert("You can't be any more rested!")
+  } else {
+    player.hp = player.hp + 10;
+  }
+}
 
+export function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
 }

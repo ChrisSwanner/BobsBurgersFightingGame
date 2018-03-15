@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Character Creation</title>
   </head>
   <body>
@@ -21,12 +22,24 @@
       </div>
       <div id="fight-screen">
         <h1>Fight Screen</h1>
-        <h2>Enemy 1</h2>
-        <h3>Randy</h3>
-        <img id="randy" src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/5/57/Randy2.png/revision/latest?cb=20130306002817" alt="">
+        <div class="jairo">
+          <h3>Jairo</h3>
+          <img id="jairo" src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/a/a6/Jairo2.png/revision/latest?cb=20130306195917" alt="">
+        </div>
+        <div class="randy">
+          <h3>Randy</h3>
+          <img id="randy" src="https://vignette.wikia.nocookie.net/bobsburgerpedia/images/5/57/Randy2.png/revision/latest?cb=20130306002817" alt="">
+        </div>
       </div>
-      <div id="randy-fight">
+      <div id="enemy-fight">
         <h1>fight that randy</h1>
+        <h3 id="playerHealth"></h3>
+        <p id="playerSpeak"></p>
+        <h3 id="monsterHealth"></h3>
+        <p id="monsterSpeak"></p>
+        <button type="button" id="playerAttack">Attack</button>
+        <button id="playerRest" type="button">Rest</button>
+        <button type="button" id="inventory">Open Inventory</button>
       </div>
     </div>
   </body>
