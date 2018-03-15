@@ -7,7 +7,7 @@ import $ from 'jquery';
 $(document).ready(function(){
   let jairoHitDescriptions = ["I AM JAIRO","BRAZIL!", "PONYTAIL!"];
   let randyHitQuotes = ["I have weak ankles...", "I was just punched in the face by your harsh words!"]
-  let playerHitDescriptions = ["Your ass is grass and I'm gonna mow it!", "Time for the charm bomb to explode!", "I’m no hero, I put my bra on one boob at a time like everyone else.", "Oh, I swear to god, if you keep talking I'm gonna gut punch you!", "Everybody hates you.", "Yeah, calm it hussy!", "Oh my god. Why do you talk so slow...", "Why don't you try speaking in words, instead of your damn dirty lies!", "This is going to be the longest hour of my life!"];
+  let playerHitDescriptions = ["Your ass is grass and I'm gonna mow it!", "Time for the charm bomb to explode!", "I’m no hero, I put my bra on one boob at a time like everyone else.", "Oh, I swear to god, if you keep talking I'm gonna gut punch you!", "Everybody hates you.", "Yeah, calm it hussy!", "Oh my god. Why do you talk so slow...", "Why don't you try speaking in words, instead of your damn dirty lies!", "This is going to be the longest hour of my life!", "I’m so mad I could stomp!", "Don’t tell me not to have a crap attack. I’ll have a crap attack any time I want.", "Oh my god."];
   let playerDeathQuotes = ["If you need me I’ll be down here on the floor dying."];
 
   $('#fight-screen').hide();
@@ -93,10 +93,15 @@ $('#playerRest').click(function(){
 })
 
 $('#inventory').click(function() {
+  let newHtml = [];
   $('#inventory-panel').slideToggle();
-  $('#inventory-list').text(selectedPlayer.inventory[0].name);
-  $('#inventory-list').text(selectedPlayer.inventory[1].name);
+  $.each(selectedPlayer.inventory, function(index, item){
+    newHtml.push('<li>' + item.name + '</li>');
+  });
+  $('#inventory-list').html(newHtml.join(""));
 });
+
+
 
 
 $('#playerAttack').click(function(){
